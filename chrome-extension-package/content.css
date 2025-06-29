@@ -1,0 +1,145 @@
+/* Styles for blocked Trump content */
+.trump-blocked-content {
+  margin: 10px 0;
+  display: block !important;
+}
+
+.trump-blocked-message {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  border: 2px solid #d63031;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  box-shadow: 0 4px 12px rgba(214, 48, 49, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.trump-blocked-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.trump-blocked-icon {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.trump-blocked-text {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.trump-blocked-type {
+  font-size: 0.9em;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* Responsive design for smaller blocked content */
+.trump-blocked-message[style*="width"] {
+  min-width: 200px;
+}
+
+.trump-blocked-message[style*="height"] {
+  min-height: 80px;
+}
+
+/* Special styling for small blocked elements */
+.trump-blocked-content[data-content-type="text"] .trump-blocked-message {
+  padding: 15px;
+  min-height: 60px;
+}
+
+.trump-blocked-content[data-content-type="text"] .trump-blocked-icon {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.trump-blocked-content[data-content-type="text"] .trump-blocked-text {
+  font-size: 1em;
+}
+
+.trump-blocked-content[data-content-type="text"] .trump-blocked-type {
+  font-size: 0.8em;
+}
+
+/* Animation for when content gets blocked */
+.trump-blocked-content {
+  animation: blockSlideIn 0.3s ease-out;
+}
+
+@keyframes blockSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ensure blocked content respects parent container styles */
+.trump-blocked-content {
+  display: inherit;
+  width: inherit;
+  height: inherit;
+  max-width: 100%;
+}
+
+/* Handle inline elements that get blocked */
+span.trump-blocked-content,
+a.trump-blocked-content {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+span.trump-blocked-content .trump-blocked-message,
+a.trump-blocked-content .trump-blocked-message {
+  padding: 8px 12px;
+  min-height: 30px;
+  font-size: 0.9em;
+}
+
+span.trump-blocked-content .trump-blocked-icon,
+a.trump-blocked-content .trump-blocked-icon {
+  font-size: 1em;
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+
+span.trump-blocked-content .trump-blocked-text,
+a.trump-blocked-content .trump-blocked-text {
+  font-size: 0.9em;
+  display: inline;
+}
+
+span.trump-blocked-content .trump-blocked-type,
+a.trump-blocked-content .trump-blocked-type {
+  display: none;
+}
