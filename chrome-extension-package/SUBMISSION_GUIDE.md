@@ -75,7 +75,8 @@ Upload these files from `promotional_assets/`:
 - **Privacy Policy**: Copy content from `PRIVACY_POLICY.md` or host it on your website
 
 ### Step 5: Pricing & Distribution
-- **Pricing**: Set to $2.50 (as mentioned in description)
+- **Basic Version**: Set to $4.98 (core functionality)
+- **Pro Version**: Set to $7.98 (enhanced features - for future release)
 - **Countries**: Select all countries or your target markets
 - **Mature Content**: No (extension blocks content, doesn't display mature content)
 
