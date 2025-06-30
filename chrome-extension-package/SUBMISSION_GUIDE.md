@@ -120,13 +120,38 @@ Fill out the privacy questionnaire:
 3. Update extension files or store listing as needed
 4. Resubmit for review
 
-## 💰 Revenue & ACLU Donation
+## 💰 **Updated Pricing Structure**
 
-Once approved and generating sales:
-1. Chrome Web Store takes 30% commission
-2. You receive 70% of $2.50 = $1.75 per sale
-3. Donate $2.50 per sale to ACLU Immigrants Rights Project as promised
-4. Consider setting up automated donation system
+### **Basic Version 1.0: $4.98**
+- All core Trump content blocking functionality
+- Works on all websites
+- Toggle enable/disable
+- Real-time statistics
+- Basic keyword blocking
+
+### **Pro Version 1.0.1: $7.98**
+- Everything in Basic version PLUS:
+- Custom keyword additions
+- Advanced filtering options
+- Export/import settings
+- Premium support
+- Early access to new features
+
+### **Revenue Distribution (Basic $4.98)**:
+```
+• Chrome Store Fee: 30% ($1.49)
+• Your Revenue: 70% ($3.49)  
+• ACLU Donation: $2.50 (from gross price)
+• Your Net Profit: $0.99 per sale
+```
+
+### **Revenue Distribution (Pro $7.98)**:
+```
+• Chrome Store Fee: 30% ($2.39)
+• Your Revenue: 70% ($5.59)
+• ACLU Donation: $2.50 (from gross price)  
+• Your Net Profit: $3.09 per sale
+```
 
 ## 📞 Support Resources
 
