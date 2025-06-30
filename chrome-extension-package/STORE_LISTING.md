@@ -37,6 +37,10 @@ Tired of seeing Trump-related content while browsing the web? The Block Trump Ex
 **Supporting a Good Cause:**
 $2.50 from each purchase goes directly to the ACLU Immigrants Rights Project, supporting immigrant rights and legal advocacy.
 
+**Two Versions Available:**
+• **Basic ($4.98)**: All core blocking functionality
+• **Pro ($7.98)**: Enhanced features + custom keywords + premium support
+
 **Privacy & Security:**
 - No data collection or tracking
 - All processing happens locally on your device
