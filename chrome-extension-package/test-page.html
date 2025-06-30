@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trump Content Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Page for Trump Content Blocking</h1>
+  
+  <div class="section">
+    <h2>Text Content Testing</h2>
+    <p>This paragraph contains the name Donald Trump which should be blocked.</p>
+    <p>This paragraph contains the name Donald J. Trump which should also be blocked.</p>
+    <p>This paragraph mentions DJT which should be blocked as an acronym.</p>
+    <p>This paragraph refers to POTUS 47 which should be blocked.</p>
+    <p>This paragraph mentions 45 which should be blocked as a reference.</p>
+    <p>This paragraph has no blocked content and should display normally.</p>
+  </div>
+  
+  <div class="section">
+    <h2>Image Testing</h2>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg" 
+         alt="Donald Trump portrait" 
+         title="Official portrait of Donald Trump">
+    <p>The image above should be blocked based on alt text and title.</p>
+    
+    <img src="https://example.com/normal-image.jpg" 
+         alt="Normal image" 
+         title="This image has no Trump references">
+    <p>The image above should NOT be blocked.</p>
+  </div>
+  
+  <div class="section">
+    <h2>Video Testing</h2>
+    <div class="video-container">
+      <iframe width="560" height="315" 
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+              title="Donald Trump speech" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen></iframe>
+    </div>
+    <p>The video above should be blocked based on its title.</p>
+    
+    <div class="video-container">
+      <iframe width="560" height="315" 
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+              title="Normal video" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen></iframe>
+    </div>
+    <p>The video above should NOT be blocked.</p>
+  </div>
+  
+  <div class="section">
+    <h2>Dynamic Content Testing</h2>
+    <button id="addTrumpContent">Add Trump Content Dynamically</button>
+    <button id="addNormalContent">Add Normal Content Dynamically</button>
+    <div id="dynamicContentContainer"></div>
+    
+    <script>
+      document.getElementById('addTrumpContent').addEventListener('click', function() {
+        const container = document.getElementById('dynamicContentContainer');
+        const newElement = document.createElement('p');
+        newElement.textContent = 'This is dynamically added content mentioning Donald Trump that should be blocked.';
+        container.appendChild(newElement);
+      });
+      
+      document.getElementById('addNormalContent').addEventListener('click', function() {
+        const container = document.getElementById('dynamicContentContainer');
+        const newElement = document.createElement('p');
+        newElement.textContent = 'This is dynamically added content with no blocked terms.';
+        container.appendChild(newElement);
+      });
+    </script>
+  </div>
+</body>
+</html>
