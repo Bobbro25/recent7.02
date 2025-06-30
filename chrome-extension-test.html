@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Block Trump Extension Pro - Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    
+    .test-section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    
+    .test-section h2 {
+      margin-top: 0;
+      color: #444;
+    }
+    
+    .extension-popup {
+      width: 380px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      margin: 20px 0;
+    }
+    
+    .extension-popup iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    
+    .content-example {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    
+    .trump-content {
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+    }
+    
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+    
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    .theme-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .theme-box {
+      width: 150px;
+      height: 100px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .theme-box:hover {
+      transform: scale(1.05);
+    }
+    
+    .theme-classic {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    }
+    
+    .theme-elegant {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    
+    .theme-minimal {
+      background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+    }
+    
+    .theme-neon {
+      background: linear-gradient(135deg, #ff0080, #7928ca);
+    }
+    
+    .theme-nature {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+    }
+    
+    .theme-sunset {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #333;
+    }
+    
+    .blocked-content {
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+    
+    .blocked-content.classic {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+      border: 2px solid #d63031;
+    }
+    
+    .blocked-content.elegant {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: 2px solid #5a67d8;
+    }
+    
+    .blocked-content.minimal {
+      background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+      border: 2px solid #34495e;
+    }
+    
+    .blocked-content.neon {
+      background: linear-gradient(135deg, #ff0080, #7928ca);
+      border: 2px solid #9333ea;
+    }
+    
+    .blocked-content.nature {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+      border: 2px solid #059669;
+    }
+    
+    .blocked-content.sunset {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      border: 2px solid #f59e0b;
+      color: #333;
+    }
+    
+    .blocked-icon {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    
+    .blocked-text {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .blocked-type {
+      font-size: 0.9em;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .blocked-count {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.7em;
+      font-weight: 600;
+    }
+    
+    .custom-message-input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .chart-container {
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      padding: 15px;
+    }
+    
+    .chart-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    .chart-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .chart-label {
+      width: 80px;
+      font-size: 0.9em;
+      margin-right: 10px;
+    }
+    
+    .chart-fill {
+      flex: 1;
+      height: 20px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .chart-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #4CAF50, #8BC34A);
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+    
+    .chart-value {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8em;
+      font-weight: 600;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Block Trump Extension Pro - Test Page</h1>
+    
+    <div class="test-section">
+      <h2>1. Enhanced UI Tabbed Interface Testing</h2>
+      <p>Testing the 380px popup width with 4 tabs: Main, Themes, Analytics, Settings</p>
+      
+      <div class="extension-popup">
+        <iframe src="/app/chrome-extension-package-pro/popup.html"></iframe>
+      </div>
+      
+      <button id="checkPopupWidth">Check Popup Width</button>
+      <button id="testTabSwitching">Test Tab Switching</button>
+      <div id="popupWidthResult"></div>
+    </div>
+    
+    <div class="test-section">
+      <h2>2. Custom Themes System Testing</h2>
+      <p>Testing all 6 themes with real-time preview</p>
+      
+      <div class="theme-preview">
+        <div class="theme-box theme-classic" data-theme="classic">Classic Red</div>
+        <div class="theme-box theme-elegant" data-theme="elegant">Elegant Blue</div>
+        <div class="theme-box theme-minimal" data-theme="minimal">Minimal Gray</div>
+        <div class="theme-box theme-neon" data-theme="neon">Neon Purple</div>
+        <div class="theme-box theme-nature" data-theme="nature">Nature Green</div>
+        <div class="theme-box theme-sunset" data-theme="sunset">Sunset Pink</div>
+      </div>
+      
+      <div class="content-example">
+        <h3>Theme Preview:</h3>
+        <div class="blocked-content classic" id="themePreview">
+          <div class="blocked-icon">🚫</div>
+          <div class="blocked-text">Trump content blocked</div>
+          <div class="blocked-type">TEXT</div>
+          <div class="blocked-count">#1</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h2>3. Custom Block Messages Testing</h2>
+      <p>Testing custom message input with real-time preview</p>
+      
+      <input type="text" class="custom-message-input" id="customMessageInput" 
+             placeholder="Enter your custom blocking message..." value="Trump content blocked">
+      
+      <div class="content-example">
+        <h3>Message Preview:</h3>
+        <div class="blocked-content classic" id="messagePreview">
+          <div class="blocked-icon">🚫</div>
+          <div class="blocked-text" id="previewText">Trump content blocked</div>
+          <div class="blocked-type">TEXT</div>
+          <div class="blocked-count">#1</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h2>4. Advanced Analytics Dashboard Testing</h2>
+      <p>Testing interactive charts and statistics export</p>
+      
+      <div class="chart-container">
+        <div class="chart-title">Blocking Statistics</div>
+        
+        <div class="chart-bar">
+          <div class="chart-label">Text</div>
+          <div class="chart-fill">
+            <div class="chart-progress" id="textProgress" style="width: 60%"></div>
+            <div class="chart-value" id="textCount">12</div>
+          </div>
+        </div>
+        
+        <div class="chart-bar">
+          <div class="chart-label">Images</div>
+          <div class="chart-fill">
+            <div class="chart-progress" id="imageProgress" style="width: 30%"></div>
+            <div class="chart-value" id="imageCount">6</div>
+          </div>
+        </div>
+        
+        <div class="chart-bar">
+          <div class="chart-label">Videos</div>
+          <div class="chart-fill">
+            <div class="chart-progress" id="videoProgress" style="width: 10%"></div>
+            <div class="chart-value" id="videoCount">2</div>
+          </div>
+        </div>
+      </div>
+      
+      <button id="exportStats">Export Statistics</button>
+      <div id="exportResult"></div>
+    </div>
+    
+    <div class="test-section">
+      <h2>5. Enhanced Settings Panel Testing</h2>
+      <p>Testing animation toggle, sound notifications, and block count display</p>
+      
+      <div>
+        <label>
+          <input type="checkbox" id="animationToggle" checked> Animation Effects
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          <input type="checkbox" id="soundToggle"> Sound Notifications
+        </label>
+      </div>
+      
+      <div>
+        <label>
+          <input type="checkbox" id="countToggle" checked> Show Block Count
+        </label>
+      </div>
+      
+      <button id="saveSettings">Save Settings</button>
+      <button id="resetSettings">Reset to Defaults</button>
+      <div id="settingsResult"></div>
+    </div>
+    
+    <div class="test-section">
+      <h2>6. Pro Content Blocking with Enhanced Features</h2>
+      <p>Testing blocking with different themes and custom messages</p>
+      
+      <div class="trump-content">
+        This is an example of content mentioning Donald Trump that would be blocked by the extension.
+      </div>
+      
+      <div class="trump-content">
+        Another example mentioning Donald J. Trump with different formatting.
+      </div>
+      
+      <button id="simulateBlocking">Simulate Blocking</button>
+      <div id="blockingResult"></div>
+    </div>
+    
+    <div class="test-section">
+      <h2>7. Settings Persistence Testing</h2>
+      <p>Testing Chrome storage sync for all Pro settings</p>
+      
+      <button id="testPersistence">Test Settings Persistence</button>
+      <div id="persistenceResult"></div>
+    </div>
+    
+    <div class="test-section">
+      <h2>8. Statistics Export Functionality</h2>
+      <p>Testing JSON export from Analytics tab</p>
+      
+      <button id="testExport">Test Export Functionality</button>
+      <div id="exportFunctionResult"></div>
+    </div>
+  </div>
+  
+  <script>
+    // Theme switching
+    const themeBoxes = document.querySelectorAll('.theme-box');
+    const themePreview = document.getElementById('themePreview');
+    
+    themeBoxes.forEach(box => {
+      box.addEventListener('click', () => {
+        const theme = box.getAttribute('data-theme');
+        themePreview.className = 'blocked-content ' + theme;
+      });
+    });
+    
+    // Custom message
+    const customMessageInput = document.getElementById('customMessageInput');
+    const previewText = document.getElementById('previewText');
+    
+    customMessageInput.addEventListener('input', () => {
+      previewText.textContent = customMessageInput.value || 'Trump content blocked';
+    });
+    
+    // Check popup width
+    document.getElementById('checkPopupWidth').addEventListener('click', () => {
+      const popup = document.querySelector('.extension-popup');
+      document.getElementById('popupWidthResult').textContent = 
+        `Popup width: ${popup.offsetWidth}px (should be 380px)`;
+    });
+    
+    // Test tab switching
+    document.getElementById('testTabSwitching').addEventListener('click', () => {
+      const iframe = document.querySelector('.extension-popup iframe');
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      
+      const tabs = iframeDoc.querySelectorAll('.tab');
+      let currentTab = 0;
+      
+      const switchTab = () => {
+        if (currentTab >= tabs.length) {
+          document.getElementById('popupWidthResult').textContent = 'Tab switching test completed';
+          return;
+        }
+        
+        tabs[currentTab].click();
+        document.getElementById('popupWidthResult').textContent = 
+          `Switched to ${tabs[currentTab].textContent.trim()} tab`;
+        
+        currentTab++;
+        setTimeout(switchTab, 1000);
+      };
+      
+      switchTab();
+    });
+    
+    // Simulate blocking
+    document.getElementById('simulateBlocking').addEventListener('click', () => {
+      const trumpContents = document.querySelectorAll('.trump-content');
+      const theme = themePreview.className.replace('blocked-content ', '');
+      const message = customMessageInput.value || 'Trump content blocked';
+      
+      trumpContents.forEach((content, index) => {
+        const blockedDiv = document.createElement('div');
+        blockedDiv.className = `blocked-content ${theme}`;
+        
+        blockedDiv.innerHTML = `
+          <div class="blocked-icon">🚫</div>
+          <div class="blocked-text">${message}</div>
+          <div class="blocked-type">TEXT</div>
+          <div class="blocked-count">#${index + 1}</div>
+        `;
+        
+        content.innerHTML = '';
+        content.appendChild(blockedDiv);
+      });
+      
+      document.getElementById('blockingResult').textContent = 
+        `Blocked content with ${theme} theme and "${message}" message`;
+    });
+    
+    // Export statistics
+    document.getElementById('exportStats').addEventListener('click', () => {
+      const statsData = {
+        totalBlocked: 20,
+        sitesVisited: 5,
+        textBlocked: 12,
+        imageBlocked: 6,
+        videoBlocked: 2,
+        exportDate: new Date().toISOString()
+      };
+      
+      const dataStr = JSON.stringify(statsData, null, 2);
+      document.getElementById('exportResult').textContent = 
+        `Statistics exported: ${dataStr}`;
+    });
+    
+    // Settings persistence
+    document.getElementById('testPersistence').addEventListener('click', () => {
+      const settings = {
+        theme: themePreview.className.replace('blocked-content ', ''),
+        customMessage: customMessageInput.value,
+        animations: document.getElementById('animationToggle').checked,
+        sounds: document.getElementById('soundToggle').checked,
+        showCount: document.getElementById('countToggle').checked
+      };
+      
+      localStorage.setItem('proSettings', JSON.stringify(settings));
+      document.getElementById('persistenceResult').textContent = 
+        `Settings saved to localStorage: ${JSON.stringify(settings)}`;
+    });
+    
+    // Load settings if they exist
+    const savedSettings = localStorage.getItem('proSettings');
+    if (savedSettings) {
+      try {
+        const settings = JSON.parse(savedSettings);
+        
+        // Apply theme
+        themePreview.className = 'blocked-content ' + (settings.theme || 'classic');
+        
+        // Apply custom message
+        customMessageInput.value = settings.customMessage || 'Trump content blocked';
+        previewText.textContent = settings.customMessage || 'Trump content blocked';
+        
+        // Apply toggles
+        document.getElementById('animationToggle').checked = settings.animations !== false;
+        document.getElementById('soundToggle').checked = settings.sounds === true;
+        document.getElementById('countToggle').checked = settings.showCount !== false;
+        
+        document.getElementById('persistenceResult').textContent = 
+          `Loaded saved settings: ${savedSettings}`;
+      } catch (e) {
+        console.error('Error loading settings:', e);
+      }
+    }
+    
+    // Save settings
+    document.getElementById('saveSettings').addEventListener('click', () => {
+      const settings = {
+        theme: themePreview.className.replace('blocked-content ', ''),
+        customMessage: customMessageInput.value,
+        animations: document.getElementById('animationToggle').checked,
+        sounds: document.getElementById('soundToggle').checked,
+        showCount: document.getElementById('countToggle').checked
+      };
+      
+      localStorage.setItem('proSettings', JSON.stringify(settings));
+      document.getElementById('settingsResult').textContent = 
+        `Settings saved: ${JSON.stringify(settings)}`;
+    });
+    
+    // Reset settings
+    document.getElementById('resetSettings').addEventListener('click', () => {
+      const defaultSettings = {
+        theme: 'classic',
+        customMessage: 'Trump content blocked',
+        animations: true,
+        sounds: false,
+        showCount: true
+      };
+      
+      // Apply default settings
+      themePreview.className = 'blocked-content classic';
+      customMessageInput.value = 'Trump content blocked';
+      previewText.textContent = 'Trump content blocked';
+      document.getElementById('animationToggle').checked = true;
+      document.getElementById('soundToggle').checked = false;
+      document.getElementById('countToggle').checked = true;
+      
+      localStorage.setItem('proSettings', JSON.stringify(defaultSettings));
+      document.getElementById('settingsResult').textContent = 
+        `Settings reset to defaults: ${JSON.stringify(defaultSettings)}`;
+    });
+    
+    // Test export functionality
+    document.getElementById('testExport').addEventListener('click', () => {
+      const statsData = {
+        totalBlocked: 20,
+        sitesVisited: 5,
+        textBlocked: 12,
+        imageBlocked: 6,
+        videoBlocked: 2,
+        exportDate: new Date().toISOString()
+      };
+      
+      const dataStr = JSON.stringify(statsData, null, 2);
+      const dataBlob = new Blob([dataStr], {type: 'application/json'});
+      const url = URL.createObjectURL(dataBlob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'block-trump-stats.json';
+      
+      document.getElementById('exportFunctionResult').textContent = 
+        `Export link created: ${link.href} (click would download in a real browser)`;
+    });
+  </script>
+</body>
+</html>
