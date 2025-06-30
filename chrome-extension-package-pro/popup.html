@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Block Trump Extension Pro</title>
+  <style>
+    body {
+      width: 380px;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      margin: 0;
+      min-height: 500px;
+    }
+    
+    .header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    
+    .title {
+      font-size: 1.4em;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .subtitle {
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+    
+    .pro-badge {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: #333;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      font-weight: 700;
+      margin-left: 8px;
+      display: inline-block;
+    }
+    
+    .tab-container {
+      display: flex;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 0;
+    }
+    
+    .tab {
+      flex: 1;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 500;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .tab.active {
+      background: rgba(255, 255, 255, 0.2);
+      border-bottom-color: #FFD700;
+    }
+    
+    .tab:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .tab-content {
+      padding: 20px;
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .controls {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 15px;
+    }
+    
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    
+    .toggle-label {
+      font-weight: 500;
+    }
+    
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 26px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 13px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .toggle-switch.active {
+      background: #4CAF50;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .toggle-switch.active .toggle-slider {
+      transform: translateX(24px);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    
+    .stat-number {
+      font-size: 1.8em;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 0.8em;
+      opacity: 0.8;
+    }
+    
+    .theme-selector {
+      margin-bottom: 15px;
+    }
+    
+    .theme-label {
+      font-size: 1em;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .theme-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+    
+    .theme-option {
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.8em;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    
+    .theme-option.selected {
+      border-color: #FFD700;
+    }
+    
+    .theme-classic {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    }
+    
+    .theme-elegant {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    
+    .theme-minimal {
+      background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+    }
+    
+    .theme-neon {
+      background: linear-gradient(135deg, #ff0080, #7928ca);
+    }
+    
+    .theme-nature {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+    }
+    
+    .theme-sunset {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+    
+    .custom-message {
+      margin-bottom: 15px;
+    }
+    
+    .custom-message label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .custom-message input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      font-size: 0.9em;
+      box-sizing: border-box;
+    }
+    
+    .chart-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .chart-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    .chart-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .chart-label {
+      width: 80px;
+      font-size: 0.8em;
+      margin-right: 10px;
+    }
+    
+    .chart-fill {
+      flex: 1;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .chart-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+    
+    .chart-value {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.7em;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.8em;
+      opacity: 0.7;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4CAF50;
+      margin-right: 8px;
+    }
+    
+    .status-indicator.disabled {
+      background: #f44336;
+    }
+    
+    .save-btn {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 10px;
+      transition: transform 0.2s;
+    }
+    
+    .save-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .export-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8em;
+      margin-top: 10px;
+    }
+    
+    .keywords-section {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .keywords-title {
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .keyword-list {
+      font-size: 0.9em;
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">🚫</div>
+    <div class="title">
+      Block Trump
+      <span class="pro-badge">PRO</span>
+    </div>
+    <div class="subtitle">Enhanced Content Blocker</div>
+  </div>
+  
+  <div class="tab-container">
+    <div class="tab active" data-tab="main">Main</div>
+    <div class="tab" data-tab="themes">Themes</div>
+    <div class="tab" data-tab="stats">Analytics</div>
+    <div class="tab" data-tab="settings">Settings</div>
+  </div>
+  
+  <!-- Main Tab -->
+  <div class="tab-content active" id="main">
+    <div class="controls">
+      <div class="toggle-container">
+        <span class="toggle-label">
+          <span class="status-indicator" id="statusIndicator"></span>
+          Extension Status
+        </span>
+        <div class="toggle-switch" id="toggleSwitch">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="blockedCount">0</div>
+        <div class="stat-label">This Page</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="totalBlocked">0</div>
+        <div class="stat-label">Total Blocked</div>
+      </div>
+    </div>
+    
+    <div class="keywords-section">
+      <div class="keywords-title">Blocked Keywords:</div>
+      <div class="keyword-list">
+        • Donald Trump<br>
+        • Donald J. Trump<br>
+        • DJT<br>
+        • POTUS 47<br>
+        • 45
+      </div>
+    </div>
+  </div>
+  
+  <!-- Themes Tab -->
+  <div class="tab-content" id="themes">
+    <div class="theme-selector">
+      <label class="theme-label">Choose Blocking Theme:</label>
+      <div class="theme-grid">
+        <div class="theme-option theme-classic selected" data-theme="classic">
+          Classic Red
+        </div>
+        <div class="theme-option theme-elegant" data-theme="elegant">
+          Elegant Blue
+        </div>
+        <div class="theme-option theme-minimal" data-theme="minimal">
+          Minimal Gray
+        </div>
+        <div class="theme-option theme-neon" data-theme="neon">
+          Neon Purple
+        </div>
+        <div class="theme-option theme-nature" data-theme="nature">
+          Nature Green
+        </div>
+        <div class="theme-option theme-sunset" data-theme="sunset">
+          Sunset Pink
+        </div>
+      </div>
+    </div>
+    
+    <div class="custom-message">
+      <label>Custom Block Message:</label>
+      <input type="text" id="customMessage" placeholder="Enter your custom blocking message..." value="Trump content blocked">
+    </div>
+    
+    <button class="save-btn" id="saveTheme">Save Theme Settings</button>
+  </div>
+  
+  <!-- Analytics Tab -->
+  <div class="tab-content" id="stats">
+    <div class="chart-container">
+      <div class="chart-title">Blocking Statistics</div>
+      
+      <div class="chart-bar">
+        <div class="chart-label">Text</div>
+        <div class="chart-fill">
+          <div class="chart-progress" id="textProgress" style="width: 60%"></div>
+          <div class="chart-value" id="textCount">12</div>
+        </div>
+      </div>
+      
+      <div class="chart-bar">
+        <div class="chart-label">Images</div>
+        <div class="chart-fill">
+          <div class="chart-progress" id="imageProgress" style="width: 30%"></div>
+          <div class="chart-value" id="imageCount">6</div>
+        </div>
+      </div>
+      
+      <div class="chart-bar">
+        <div class="chart-label">Videos</div>
+        <div class="chart-fill">
+          <div class="chart-progress" id="videoProgress" style="width: 10%"></div>
+          <div class="chart-value" id="videoCount">2</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="sitesVisited">0</div>
+        <div class="stat-label">Sites Visited</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="avgPerSite">0</div>
+        <div class="stat-label">Avg Per Site</div>
+      </div>
+    </div>
+    
+    <button class="export-btn" id="exportStats">Export Statistics</button>
+  </div>
+  
+  <!-- Settings Tab -->
+  <div class="tab-content" id="settings">
+    <div class="controls">
+      <div class="toggle-container">
+        <span class="toggle-label">Animation Effects</span>
+        <div class="toggle-switch active" id="animationToggle">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      
+      <div class="toggle-container">
+        <span class="toggle-label">Sound Notifications</span>
+        <div class="toggle-switch" id="soundToggle">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      
+      <div class="toggle-container">
+        <span class="toggle-label">Show Block Count</span>
+        <div class="toggle-switch active" id="countToggle">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="save-btn" id="saveSettings">Save All Settings</button>
+    <button class="export-btn" id="resetSettings">Reset to Defaults</button>
+  </div>
+  
+  <div class="footer">
+    Pro Version 1.0.1 • Enhanced UI Features
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
