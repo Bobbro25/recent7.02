@@ -139,13 +139,28 @@ class TrumpBlocker {
       height = element.offsetHeight || computedStyle.height || '200px';
     }
     
-    blockedDiv.innerHTML = `
-      <div class="trump-blocked-message" style="width: ${width}; height: ${height};">
-        <div class="trump-blocked-icon">🚫</div>
-        <div class="trump-blocked-text">Trump content blocked</div>
-        <div class="trump-blocked-type">${contentType}</div>
-      </div>
-    `;
+    // Create blocked message structure securely
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'trump-blocked-message';
+    messageDiv.style.width = width;
+    messageDiv.style.height = height;
+    
+    const iconDiv = document.createElement('div');
+    iconDiv.className = 'trump-blocked-icon';
+    iconDiv.textContent = '🚫';
+    
+    const textDiv = document.createElement('div');
+    textDiv.className = 'trump-blocked-text';
+    textDiv.textContent = 'Trump content blocked';
+    
+    const typeDiv = document.createElement('div');
+    typeDiv.className = 'trump-blocked-type';
+    typeDiv.textContent = contentType;
+    
+    messageDiv.appendChild(iconDiv);
+    messageDiv.appendChild(textDiv);
+    messageDiv.appendChild(typeDiv);
+    blockedDiv.appendChild(messageDiv);
     
     // Store original element for potential restoration
     blockedDiv.originalElement = element.cloneNode(true);
